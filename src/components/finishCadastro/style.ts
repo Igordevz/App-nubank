@@ -18,7 +18,7 @@ export const ContentMain = styled.View`
     overflow: hidden;
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 `
 export const HeaderContent = styled.View`
     display: flex;
@@ -100,12 +100,11 @@ export const Button = styled.TouchableOpacity`
 
 export const Footer = styled.View`
     background: #F1F0F5;
-    margin-top: 40px;
+    bottom: 0;
     height: 100px;
     width: 100%;
     display: flex;
     justify-content: center;
-position: relative;
 `
 export const ComponentFooter = styled.View`
     height: 100%;
@@ -115,7 +114,6 @@ export const ComponentFooter = styled.View`
     margin-left: 20px;
 `
 export const SetaLeft = styled.Image`
-
     position: absolute;
     right: 40px;
 
