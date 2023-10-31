@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ActivityIndicator,
   Image,
@@ -8,16 +8,33 @@ import {
   View,
 } from "react-native";
 import * as S from "../components/cadastro/style";
+import * as LocalAuthentication from 'expo-local-authentication';
 import { useState } from "react";
-export default function Cadastro({navigation}:any) {
+export default function Cadastro({ navigation }: any) {
+
+  const [cpf, setCpf] = useState("")
+  const [email, setEmail] = useState("");
   const [loading, setloading] = useState(false);
 
+  useEffect(() =>{
+    const auth = LocalAuthentication.authenticateAsync({
+      promptMessage: "Desbloquei seu Smartphone"
+    })
+
+
+  }, [])
+
   function handlerLoading() {
+
+    if(email.length <= 5 && cpf?.length != 11 ){
+      return alert("Dados Inválidos")
+    }
+
     setloading(true);
 
     setTimeout(() => {
       setloading(false);
-      navigation.navigate("finishcadastro")
+      navigation.navigate("finishcadastro");
     }, 2000);
   }
 
@@ -35,7 +52,7 @@ export default function Cadastro({navigation}:any) {
           <S.Form>
             <S.TextInfo>Insira seu Email</S.TextInfo>
             <S.Input
-              
+              onChange={(e) => setEmail(e.nativeEvent.text)}
               keyboardType="email-address"
               enablesReturnKeyAutomatically
               placeholder="roxinho@gmail.com"
@@ -43,6 +60,7 @@ export default function Cadastro({navigation}:any) {
             ></S.Input>
             <S.TextInfo>Insira seu CPF</S.TextInfo>
             <S.Input
+                onChange={(e) => setCpf(e.nativeEvent.text)}
               placeholder="******"
               placeholderTextColor={"white"}
             ></S.Input>

@@ -1,11 +1,9 @@
 import {
-  View,
   Text,
   StatusBar,
-  ScrollView,
   Image,
   TouchableOpacity,
-  KeyboardAvoidingView,
+  ActivityIndicator
 } from "react-native";
 import React from "react";
 import {
@@ -27,9 +25,22 @@ import {
   TopImg,
 } from "../components/finishCadastro/style";
 
+import { useState } from "react";
+
 export default function FinishCadastro({ navigation }: any) {
+
+  const [loading, setLoading] = useState(false)
+
   function handlerBack() {
     navigation.navigate("Cadastro");
+  }
+  function NavigationNextRouter(){
+    setLoading(true)
+
+    setTimeout(() => {
+      setLoading(false)
+      navigation.navigate("home")
+    }, 2000);
   }
   return (
     <ContainerSob>
@@ -59,8 +70,13 @@ export default function FinishCadastro({ navigation }: any) {
               <InputForm placeholder="*****"></InputForm>
             </FormFinaly>
 
-          <Button>
-            <Text style={{ fontSize: 17, color: "white" }}>Finalizar</Text>
+          <Button onPress={NavigationNextRouter}>
+            {loading ? (
+              <ActivityIndicator size={24} color={"white"}/>
+            ) : (
+              <Text style={{ fontSize: 17, color: "white" }}
+              >Finalizar</Text>
+            )}
           </Button>
           <Footer>
             <TouchableOpacity
